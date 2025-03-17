@@ -21,6 +21,13 @@
             margin: auto;
             color: black;
         }
+        .countdown {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -28,25 +35,33 @@
     <div class="container">
         <h1>Welcome!</h1>
         <p>Please wait while we redirect you...</p>
+
+        <!-- Countdown Timer -->
+        <p class="countdown" id="countdown">Redirecting in <span id="timer">00</span> seconds...</p>
     </div>
 
     <script>
-        const whatsappNumbers = [
-            "8292285846", "7544092023", "7838857278", "7541065310",
-            "8476913498", "8606336253", 
-        ];
+        const telegramLink = "https://t.me/+SC2I0l31_B84MjM1";
 
-        function getRandomNumber() {
-            return whatsappNumbers[Math.floor(Math.random() * whatsappNumbers.length)];
+        setTimeout(startCountdown, 0000); // पेज लोड होने के 3 सेकंड बाद काउंटडाउन स्टार्ट होगा
+
+        function startCountdown() {
+            document.getElementById("countdown").style.display = "block";
+
+            let timeLeft = 0;
+            let timer = document.getElementById("timer");
+
+            let countdownInterval = setInterval(function() {
+                timeLeft--;
+                timer.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = telegramLink;
+                }
+            }, 1000);
         }
-
-        setTimeout(function() {
-            let randomNumber = getRandomNumber();
-            let message = encodeURIComponent("Hello, my invitation code is 934699. I am very interested in what you share.");
-            window.location.href = "https://wa.me/91" + randomNumber + "?text=" + message;
-        }, 3000); // 3 सेकंड बाद रीडायरेक्ट होगा
-
     </script>
 
 </body>
-  </html>
+</html>
